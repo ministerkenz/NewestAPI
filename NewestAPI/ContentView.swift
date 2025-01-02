@@ -6,21 +6,20 @@
 //
 
 import SwiftUI
-
-enum ViewState {
-    case articleList, WebView
+enum ViewState{
+    case pokemonList, webView
 }
 
 struct ContentView: View {
-    @State var viewState: ViewState = .articleList
     @State var articleURL: String = " "
+    @State var viewState: ViewState = .pokemonList
     
     
     var body: some View {
-        if viewState == .articleList {
-            ArticleListView(viewState: $viewState)
-        } else {
-            WebViewContainer(viewState: $viewState, articleURL: $articleURL)
+        if viewState == .pokemonList{
+            PokemonListView(viewState: $viewState)
+        }else{
+            
         }
         
         }
