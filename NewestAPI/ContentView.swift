@@ -7,17 +7,26 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("good night, world!")
-        }
-        .padding()
-    }
+enum ViewState {
+    case articleList, WebView
 }
+
+struct ContentView: View {
+    @State var viewState: ViewState = .articleList
+    @State var articleURL: String = " "
+    
+    
+    var body: some View {
+        if viewState == .articleList {
+            ArticleListView(viewState: $viewState)
+        } else {
+            WebViewContainer(viewState: $viewState, articleURL: $articleURL)
+        }
+        
+        }
+        
+    }
+
 
 #Preview {
     ContentView()

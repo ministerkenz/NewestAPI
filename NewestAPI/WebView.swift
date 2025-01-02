@@ -1,18 +1,35 @@
 //
 //  WebView.swift
-//  NewestAPI
+//  JSON Decoding 1
 //
-//  Created by Kenzo Yubitani (student LM) on 12/17/24.
+//  Created by Swope, Thomas on 12/16/21.
 //
 
 import SwiftUI
+import WebKit
 
-struct WebView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct SwiftUIWebView : UIViewRepresentable{
+    
+    let urlString: String
+    
+    func makeUIView(context: Context) -> WKWebView {
+        var prefs = WKWebpagePreferences()
+        prefs.allowsContentJavaScript = true
+        let config = WKWebViewConfiguration()
+        config.defaultWebpagePreferences = prefs
+        return WKWebView(frame: .zero, configuration: config)
     }
-}
-
-#Preview {
-    WebView()
+    
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        let updatedString = urlString.replacingOccurrences(of: "http:", with: "https:")
+        print(updatedString)
+        guard let url = URL(string: updatedString) else{
+            print("failed")
+            return
+        }
+        let request = URLRequest(url: url)
+        uiView.load(request)
+    }
+    
+    
 }
