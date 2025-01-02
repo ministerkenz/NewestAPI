@@ -15,3 +15,20 @@ struct FetchData{
         
     }
 }
+
+struct Response: Codable{
+    var abilities: [Abilities] = []
+    var name: String = "loading..."
+    var url: String = " "
+    
+}
+
+struct Abilites: Codable{
+    var name: String?
+    var url: String?
+}
+
+extension Abilites: Identifiable{
+    var id: String {name ?? " "}
+    
+}
