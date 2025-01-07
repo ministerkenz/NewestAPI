@@ -57,6 +57,7 @@ struct Pokemon :Codable{
     var name : String?
     var sprites: Sprites = Sprites()
     var weight: Int = 0
+    
 }
 
 struct Sprites: Codable {

@@ -8,39 +8,44 @@
 import SwiftUI
 
 struct PokemonListView: View {
-    @Binding var viewState : ViewState
+    @Binding var viewState: ViewState
     @State var data = FetchData()
-    @State var data2 = FetchData2()
+    @State private var searchQuery: String = ""
+    
+    var filteredResults: [Result] {
+        if searchQuery.isEmpty {
+            return data.response.results
+        } else {
+            return data.response.results.filter {
+                $0.name?.lowercased().contains(searchQuery.lowercased()) ?? false
+            }
+        }
+    }
     
     var body: some View {
-//        NavigationView{
-//            List(data.response.results){ result in
-//                NavigationLink{
-//                    
-//                }label:{
-//                    Text(result.name?.capitalized ?? " ")
-//                }.navigationTitle("Pokémon List")
-//            }
-//        }
-//        .task {
-//            await data.getData()
-//        }
         NavigationView {
-                    List(data.response.results) { result in
-                        NavigationLink(destination: PokemonView(urlString: result.url ?? "")) {
-                            Text(result.name?.capitalized ?? "Unknown")
-                        }
-                    }
-                    .navigationTitle("Pokémon List")
-                    .task {
-                        await data.getData()
-                    }
-                    .refreshable {
-                        await data.getData()
+            VStack {
+                // Search Bar
+                TextField("Search Pokémon", text: $searchQuery)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+                
+                // Pokémon List
+                List(filteredResults) { result in
+                    NavigationLink(destination: PokemonView(urlString: result.url ?? "")) {
+                        Text(result.name?.capitalized ?? "Unknown")
                     }
                 }
+                .navigationTitle("Pokémon List")
+                .task {
+                    await data.getData()
+                }
+                .refreshable {
+                    await data.getData()
+                }
+            }
+        }
     }
-
 }
 
 #Preview {
