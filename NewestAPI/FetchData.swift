@@ -14,7 +14,6 @@ struct FetchData{
         let URLString = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1302"
         guard let url = URL(string: URLString) else{return}
         guard let (data, _) = try? await URLSession.shared.data (from:url)else{return}
-        
         guard let r = try? JSONDecoder().decode(Response.self, from: data)else{return}
         response = r
         
@@ -56,11 +55,21 @@ struct Pokemon :Codable{
     var id : Int = 0
     var name : String?
     var sprites: Sprites = Sprites()
+    var types: [typeS] = []
     var weight: Int = 0
+    
     
 }
 
 struct Sprites: Codable {
     var front_default: URL?
     var back_default: URL?
+}
+
+struct typeS: Codable {
+    var type: typee = typee()
+}
+
+struct typee: Codable{
+    var name: String?
 }
