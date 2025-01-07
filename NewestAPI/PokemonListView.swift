@@ -25,12 +25,12 @@ struct PokemonListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // Search Bar
+                // Search Bar:
                 TextField("Search Pokémon", text: $searchQuery)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
                 
-                // Pokémon List
+            
                 List(filteredResults) { result in
                     NavigationLink(destination: PokemonView(urlString: result.url ?? "")) {
                         Text(result.name?.capitalized ?? "Unknown")
