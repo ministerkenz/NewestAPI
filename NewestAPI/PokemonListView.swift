@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PokemonListView: View {
-    @Binding var viewState: ViewState
     @State var data = FetchData()
     @State private var searchQuery: String = ""
     
@@ -49,5 +48,5 @@ struct PokemonListView: View {
 }
 
 #Preview {
-    PokemonListView(viewState: Binding.constant(.pokemonList))
+    PokemonListView()
 }
