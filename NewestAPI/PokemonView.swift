@@ -15,8 +15,8 @@ struct PokemonView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(Color.gray)
-                .cornerRadius(20)
+                .foregroundColor(Color.backgroundBlue)
+                .cornerRadius(Constants.cornerRadius)
             
             VStack{
                 Text(data.pokemon.name?.capitalized ?? "Unknown")
