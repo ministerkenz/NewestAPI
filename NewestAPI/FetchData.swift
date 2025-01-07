@@ -54,16 +54,12 @@ struct FetchData2{
 struct Pokemon :Codable{
     var height : Int = 0
     var id : Int = 0
-    var name : String? 
+    var name : String?
     var sprites: Sprites = Sprites()
     var weight: Int = 0
 }
 
 struct Sprites: Codable {
-    var showdown: Showdown = Showdown()
-}
-
-struct Showdown: Codable {
     var front_default: URL?
     var back_default: URL?
 }

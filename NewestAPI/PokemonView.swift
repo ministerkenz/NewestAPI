@@ -23,7 +23,7 @@ struct PokemonView: View {
                     .font(.largeTitle)
                     .padding()
                 
-                AsyncImage(url: data.pokemon.sprites.showdown.back_default){
+                AsyncImage(url: data.pokemon.sprites.back_default){
                     phase in
                     switch phase{
                     case .empty:
