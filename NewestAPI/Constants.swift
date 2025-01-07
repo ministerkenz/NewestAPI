@@ -10,7 +10,9 @@ import SwiftUI
 struct Constants {
     
     static let padding: CGFloat = 5
-    static let TextFont: Font = Font(UIFont(name: "Helvaitca-Neue", size: 50) ??
+    static let TextFont: Font = Font(UIFont(name: "Helvetica-Neue", size: 30) ??
+    UIFont.systemFont(ofSize: 30))
+    static let TitleFont: Font = Font(UIFont(name: "Helvetica-Neue", size: 70) ??
     UIFont.systemFont(ofSize: 40))
     static let cornerRadius: CGFloat = 10
 }
@@ -21,3 +23,4 @@ extension Color{
 extension Color{
     static let backgroundRed = Color("2ndbackground")
 }
+

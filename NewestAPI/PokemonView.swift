@@ -14,35 +14,64 @@ struct PokemonView: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(Color.backgroundBlue)
-                .cornerRadius(Constants.cornerRadius)
+//            Rectangle()
+//                .fill(Color.backgroundBlue)
+//                .cornerRadius(Constants.cornerRadius)
+//                .padding(-80)
             
             VStack{
+               
                 Text(data.pokemon.name?.capitalized ?? "Unknown")
-                    .font(.largeTitle)
+                    .font(Constants.TitleFont)
                     .padding()
+                    .background(Color.background)
+                    .cornerRadius(40)
                 
-                AsyncImage(url: data.pokemon.sprites.back_default){
-                    phase in
-                    switch phase{
-                    case .empty:
-                        ProgressView()
-                            .frame(height:150)
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 150)
-                    case .failure(let error):
-                        Image ("fnf")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height:150)
+                
+                HStack{
+                    AsyncImage(url: data.pokemon.sprites.front_default){
+                        phase in
+                        switch phase{
+                        case .empty:
+                            ProgressView()
+                                .frame(height:150)
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 500)
+                        case .failure(let error):
+                            Image ("fnf")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height:500)
+                        }
                     }
+                    
+//                    AsyncImage(url: data.pokemon.sprites.back_default){
+//                        phase in
+//                        switch phase{
+//                        case .empty:
+//                            ProgressView()
+//                                .frame(height:150)
+//                        case .success(let image):
+//                            image
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fit)
+//                                .frame(height: 150)
+//                        case .failure(let error):
+//                            Image ("fnf")
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fit)
+//                                .frame(height:150)
+//                        }
+//                    }
                 }
-                Text("Height: \(data.pokemon.height)")
-                Text("Weight: \(data.pokemon.weight)")
+                Text("Height: \(data.pokemon.height*10) cm")
+                    .font(Constants.TextFont)
+                Text("Weight: \(data.pokemon.weight*100) grams")
+                    .font(Constants.TextFont)
+                
                 
             }
         }.padding()
