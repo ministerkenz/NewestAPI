@@ -46,7 +46,7 @@ struct PokemonView: View {
                             image
                                 .resizable()
                                 .aspectRatio(contentMode:.fit)
-                                .frame(width:135,height:135)
+                                .frame(width:115,height:115)
                         case .failure(let error):
                             Image ("fnf")
                                 .resizable()
@@ -56,31 +56,30 @@ struct PokemonView: View {
                     }
                 }
                 
+                
+                
                
                 Text(data.pokemon.name?.capitalized ?? "Unknown")
                     .font(Constants.TitleFont)
                     .padding()
                     .bold()
                 
-                
-                HStack{
-                    AsyncImage(url: data.pokemon.sprites.front_default){
-                        phase in
-                        switch phase{
-                        case .empty:
-                            ProgressView()
-                                .frame(height:150)
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 350)
-                        case .failure(let error):
-                            Image ("fnf")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height:500)
-                        }
+                AsyncImage(url: data.pokemon.sprites.front_default){
+                    phase in
+                    switch phase{
+                    case .empty:
+                        ProgressView()
+                            .frame(height:150)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 350)
+                    case .failure(let error):
+                        Image ("fnf")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height:500)
                     }
                 }
                 HStack{
